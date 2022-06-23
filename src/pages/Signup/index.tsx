@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import * as C from './styles'
 import { Button } from '../../components/Button'
@@ -22,10 +22,10 @@ export function Signup(){
 
   const handleSignup = () =>{
     if(!name || !email || !password || !passwordConfirmation){
-      showError("Preencha todos os campos")
+      showError("Please fill out all the fields")
       return
     }else if(password !== passwordConfirmation){
-      showError("As senhas não são iguais")
+      showError("Passwords do not match")
       return
     }
 
@@ -37,10 +37,17 @@ export function Signup(){
       return
     }
 
-    alert("Usuário cadastrado com sucesso!")
+    alert("User registration successful")
     showError('')
     navigate('/signin')
   }
+
+  useEffect(() =>{
+    showError('')
+    if(localStorage.getItem('user_login_token')){
+      navigate('/')
+    }
+  }, [])
 
   return(
       <C.Section>

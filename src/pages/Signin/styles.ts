@@ -14,6 +14,11 @@ export const Background = styled(motion.div)`
   height: 100vh;
   background-color: #fff;
   position: absolute;
+
+  @media (min-width: 1000px){
+    clip-path: circle(80% at 22% 25%);
+  }
+
 `;
 
 export const Main = styled.main`
@@ -24,10 +29,12 @@ export const Main = styled.main`
 
 export const MainCenter = styled.div`
   width: 90vw;
+  height: 100%;
   margin: auto;
+  max-width: 1100px;
   justify-content: center;
   display: flex;
-  align-items: center;
+  // align-items: center;
 `;
 
 export const FormWrap = styled.div``;
@@ -73,7 +80,7 @@ export const Input = styled.input`
 
 export const ErrorMessage = styled.span`
   text-align: center;
-  color: #a73d3a;
+  color: crimson;
   font-size: .875rem;
   letter-spacing: .1rem;
   font-weight: 700;

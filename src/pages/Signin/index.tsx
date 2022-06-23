@@ -17,13 +17,13 @@ export function Signin(){
     e.preventDefault()
   }
 
-  const handleSignin = async () =>{
+  const handleSignin =() =>{
     if(!email || !password){
-        showError("Preencha todos os dados")
+        showError("Please fill out all the fields")
       return
     }
 
-    const res = await signin(email, password)
+    const res = signin(email, password)
 
     if(res){
       showError(res)
@@ -32,6 +32,13 @@ export function Signin(){
 
     navigate('/')
   }
+
+  useEffect(() =>{
+    showError('')
+    if(localStorage.getItem('user_login_token')){
+      navigate('/')
+    }
+  }, [])
 
   return(
     <C.Section>

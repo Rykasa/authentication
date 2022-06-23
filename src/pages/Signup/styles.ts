@@ -10,13 +10,17 @@ export const Section = styled(motion.section)`
 
 export const Background = styled(motion.div)`
   /* clip-path: circle(76.7% at  74% 33%); */
-  clip-path: circle(90% at 99% );
+  clip-path: circle(90% at 99% 52%);
   width: 100%;
   height: 100vh;
   background-color: #fff;
   position: absolute;
   top: 0;
   left: 0;
+
+  @media (min-width: 1000px){
+    clip-path: circle(90% at 79%  52%);
+  }
 `;
 
 export const Main = styled.main`
@@ -28,6 +32,7 @@ export const Main = styled.main`
 export const MainCenter = styled.div`
   width: 75vw;
   margin: auto;
+  max-width: 1100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,7 +80,7 @@ export const Input = styled.input`
 
 export const ErrorMessage = styled.span`
   text-align: center;
-  color: #a73d3a;
+  color: crimson;
   font-size: .875rem;
   letter-spacing: .1rem;
   font-weight: 700;

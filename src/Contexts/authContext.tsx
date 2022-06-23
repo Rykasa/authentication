@@ -53,7 +53,7 @@ export function AuthContextProvider({children}: AuthContextProviderProps){
 
       if(hasUser?.length){
         console.log(hasUser)
-        return "Já tem uma conta com esse E-mail"
+        return "That Email is taken. Try Another."
       }
 
       let newUser
@@ -86,13 +86,13 @@ export function AuthContextProvider({children}: AuthContextProviderProps){
           setUser({name: hasUser[0].name, email, password})
           return;
         }else{
-          return "Email ou senha incorretos"
+          return "Email or password is incorrect"
         }
       }else{
-        return 'usuário não cadastrado'
+        return 'User is not registered'
       }
     }else{
-      return "Usuário não cadastrado"
+      return "User is not registered"
     }
   }
 
