@@ -1,16 +1,16 @@
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { AnimatedRoutes } from './components/AnimatedRoutes'
 import { AnimationContextProvider } from './Contexts/animationContext'
 import { AuthContextProvider } from './Contexts/authContext'
 
 export function App(){
   return(
-    <AnimationContextProvider>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <AnimationContextProvider>
         <BrowserRouter>
           <AnimatedRoutes />
         </BrowserRouter>
-      </AuthContextProvider>
-    </AnimationContextProvider>
+      </AnimationContextProvider>
+    </AuthContextProvider>
   )
 }

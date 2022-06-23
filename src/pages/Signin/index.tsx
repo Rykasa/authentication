@@ -5,7 +5,7 @@ import { useAnimationContext } from '../../hooks/useAnimationContext'
 import { useAuth } from '../../hooks/useAuth'
 import * as C from './styles'
 
-export function Singin(){
+export function Signin(){
   const { isAnimationRunning, startSigninAnimationOnClick, exit } = useAnimationContext()
   const { error, showError, signin } = useAuth()
   const [email, setEmail] = useState('')

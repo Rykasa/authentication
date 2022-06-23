@@ -101,11 +101,3 @@ export const Text = styled.span`
     }
   }
 `;
-
-
-
-// verde - 
-// preto - 2C0735
-// cinza - 696D7D
-// laranja FAA381
-// vermei  96031A

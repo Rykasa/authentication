@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from "react"
+import { useAuth } from "../hooks/useAuth";
 
 interface AnimationContextData{
   isAnimationRunning: boolean;
@@ -24,14 +25,18 @@ export function AnimationContextProvider({children}: AnimationContextProviderPro
   const [isAnimationRunning, setIsAnimationRunning] = useState(false)
   const [exit, setExit] = useState({ x: '', transition: { duration: 0 } })
 
+  const { showError } = useAuth()
+
   function startSigninAnimationOnClick(){
     setIsAnimationRunning(true)
     setExit({ x: '-100%', transition: { duration: 1 } })
+    showError('')
   }
 
   function startSignupAnimationOnClick(){
     setIsAnimationRunning(true)
     setExit({ x: '100%', transition: { duration: 1 } })
+    showError('')
   }
 
   return(

@@ -9,9 +9,11 @@ interface User{
 interface AuthContextData{
   user: User | null;
   error: string;
+  signed: boolean;
   showError: (message: string) => void
   signup: (name: string, email: string, password: string) => string | undefined
   signin: (email: string, password: string) => string | undefined
+  logout: () => void
 }
 
 interface AuthContextProviderProps{
@@ -23,6 +25,21 @@ export const AuthContext = createContext({} as AuthContextData)
 export function AuthContextProvider({children}: AuthContextProviderProps){
   const [user, setUser] = useState<User | null>(null)
   const [error, setError] = useState('')
+
+  useEffect(() =>{
+    const userToken = localStorage.getItem('user_login_token')
+    const usersStorage = localStorage.getItem('registered_users')
+
+    if(userToken && usersStorage){
+      const hasUser: [User] = JSON.parse(usersStorage).filter((user: User) => {
+        return user.email === JSON.parse(userToken).email
+      })
+
+      if(hasUser){
+        setUser(hasUser[0])
+      }
+    }
+  }, [])
 
   function showError(message: string){
     setError(message)
@@ -62,8 +79,6 @@ export function AuthContextProvider({children}: AuthContextProviderProps){
 
       const hasUser: [User] = usersStorage?.filter((user: User) => user.email === email )
 
-      console.log(hasUser)
-
       if(hasUser?.length){
         if(hasUser[0].email === email && hasUser[0].password === password){
           const token = Math.random().toString(36).substring(2)
@@ -81,13 +96,20 @@ export function AuthContextProvider({children}: AuthContextProviderProps){
     }
   }
 
+  function logout(){
+    setUser(null)
+    localStorage.removeItem('user_login_token')
+  }
+
   return(
     <AuthContext.Provider value={{
       user,
       error,
+      signed: !!user,
       showError,
       signup,
-      signin
+      signin,
+      logout
     }}> 
       { children }
     </AuthContext.Provider>
