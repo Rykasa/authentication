@@ -77,6 +77,7 @@ export const ErrorMessage = styled.span`
   font-size: .875rem;
   letter-spacing: .1rem;
   font-weight: 700;
+  margin-bottom: .5rem;
 `;
 
 export const ButtonWrap = styled.div`

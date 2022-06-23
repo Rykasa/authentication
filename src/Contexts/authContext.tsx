@@ -11,6 +11,7 @@ interface AuthContextData{
   error: string;
   showError: (message: string) => void
   signup: (name: string, email: string, password: string) => string | undefined
+  signin: (email: string, password: string) => string | undefined
 }
 
 interface AuthContextProviderProps{
@@ -54,13 +55,39 @@ export function AuthContextProvider({children}: AuthContextProviderProps){
     }
   }
 
+  function signin(email: string, password: string){
+    const storage = localStorage.getItem('registered_users')
+    if(typeof storage === 'string'){
+      const usersStorage = JSON.parse(storage)
+
+      const hasUser: [User] = usersStorage?.filter((user: User) => user.email === email )
+
+      console.log(hasUser)
+
+      if(hasUser?.length){
+        if(hasUser[0].email === email && hasUser[0].password === password){
+          const token = Math.random().toString(36).substring(2)
+          localStorage.setItem('user_login_token', JSON.stringify({ email, token }))
+          setUser({name: hasUser[0].name, email, password})
+          return;
+        }else{
+          return "Email ou senha incorretos"
+        }
+      }else{
+        return 'usuário não cadastrado'
+      }
+    }else{
+      return "Usuário não cadastrado"
+    }
+  }
+
   return(
     <AuthContext.Provider value={{
       user,
       error,
       showError,
       signup,
-
+      signin
     }}> 
       { children }
     </AuthContext.Provider>

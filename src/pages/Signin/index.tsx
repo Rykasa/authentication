@@ -1,11 +1,37 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { FormEvent, useEffect, useState } from 'react'
+import { Link, useNavigate} from 'react-router-dom'
 import { Button } from '../../components/Button'
 import { useAnimationContext } from '../../hooks/useAnimationContext'
+import { useAuth } from '../../hooks/useAuth'
 import * as C from './styles'
 
 export function Singin(){
   const { isAnimationRunning, startSigninAnimationOnClick, exit } = useAnimationContext()
+  const { error, showError, signin } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const navigate = useNavigate()
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) =>{
+    e.preventDefault()
+  }
+
+  const handleSignin = async () =>{
+    if(!email || !password){
+        showError("Preencha todos os dados")
+      return
+    }
+
+    const res = await signin(email, password)
+
+    if(res){
+      showError(res)
+      return
+    }
+
+    navigate('/')
+  }
 
   return(
     <C.Section>
@@ -19,20 +45,34 @@ export function Singin(){
           <C.MainCenter>
             <C.FormWrap>
               <C.Heading>Welcome Back!</C.Heading>
-              <C.Form>
-                <C.Label htmlFor="email">
+              <C.Form onSubmit={handleSubmit}>
+                <C.Label htmlFor="email-field">
                   Email
-                  <C.Input type="email" placeholder="Enter your email" name="email" />
+                  <C.Input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    name="email-field" 
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                  />
                 </C.Label>
-                <C.Label htmlFor="password">
+                <C.Label htmlFor="password-field">
                   Password
-                  <C.Input type="password" name="password" placeholder="Password" autoComplete='on' />
+                  <C.Input 
+                    type="password" 
+                    name="password-field" 
+                    placeholder="Password" 
+                    autoComplete='on' 
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                  />
                 </C.Label>
-                  <C.ErrorMessage>Empty value</C.ErrorMessage>
+                  <C.ErrorMessage>{error}</C.ErrorMessage>
                 <C.ButtonWrap>
                   <Button
                     type="submit"
                     title="Log in"
+                    onClick={handleSignin}
                   />
                 </C.ButtonWrap>
                 <C.Text>

@@ -55,44 +55,44 @@ export function Signup(){
               <C.FormWrap>
                 <C.Heading>Create your Account!</C.Heading>
                 <C.Form onSubmit={handleSubmit}>
-                  <C.Label htmlFor="name">
+                  <C.Label htmlFor="name-field">
                     Name
                     <C.Input 
                       type="text" 
                       placeholder="Enter your name" 
-                      name="name"
+                      name="name-field"
                       value={name}
                       onChange={e => setName(e.target.value)}
 
                     />
                   </C.Label>
-                  <C.Label htmlFor="email">
+                  <C.Label htmlFor="email-field">
                     Email
                     <C.Input 
                       type="email" 
                       placeholder="Enter your email" 
-                      name="email" 
+                      name="email-field" 
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                     />
                   </C.Label>
-                  <C.Label htmlFor="new-password">
+                  <C.Label htmlFor="password-field">
                     Password
                     <C.Input 
                       type="password" 
                       placeholder="Enter your password" 
-                      name="new-password" 
+                      name="password-field" 
                       autoComplete='on'
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                     />
                   </C.Label>
-                  <C.Label htmlFor="password-confirm">
+                  <C.Label htmlFor="password-confirm-field">
                     Confirm Password
                     <C.Input 
                       type="password" 
                       placeholder="Enter your password" 
-                      name="password-confirm" 
+                      name="password-confirm-field" 
                       autoComplete='on'
                       value={passwordConfirmation}
                       onChange={e => setPasswordConfirmation(e.target.value)}
