@@ -7,10 +7,6 @@ import * as C from './styles'
 export function Singin(){
   const { isAnimationRunning, startSigninAnimationOnClick, exit } = useAnimationContext()
 
-useEffect(() =>{
-
-}, [exit])
-
   return(
     <C.Section>
       <C.Background
@@ -32,8 +28,12 @@ useEffect(() =>{
                   Password
                   <C.Input type="password" name="password" placeholder="Password" autoComplete='on' />
                 </C.Label>
+                  <C.ErrorMessage>Empty value</C.ErrorMessage>
                 <C.ButtonWrap>
-                  <Button>Log in</Button>
+                  <Button
+                    type="submit"
+                    title="Log in"
+                  />
                 </C.ButtonWrap>
                 <C.Text>
                   Don't have an account? 

@@ -71,6 +71,14 @@ export const Input = styled.input`
   color: #2C0735;
 `;
 
+export const ErrorMessage = styled.span`
+  text-align: center;
+  color: #a73d3a;
+  font-size: .875rem;
+  letter-spacing: .1rem;
+  font-weight: 700;
+`;
+
 export const ButtonWrap = styled.div`
   display: flex;
   justify-content: flex-end;
