@@ -1,16 +1,18 @@
-import { Link, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import * as C from './styles'
 import { Button } from '../../components/Button'
+import { useAnimationContext } from '../../hooks/useAnimationContext'
 
 
 export function Signup(){
+  const { isAnimationRunning, startSignupAnimationOnClick, exit } = useAnimationContext()
+
   return(
       <C.Section>
         <C.Background 
-          initial={{ x: '100%' }}
-          animate={{ x: '0%' }}
-          exit={{ x: '100%', transition: { duration: 1 } }}
+          initial={ isAnimationRunning ? { x: '100%' } : '' }
+          animate={ isAnimationRunning ? { x: '0%' } : '' }
+          exit={ exit }
           transition={{ duration:  1, delay: 1}}
         >
           <C.Main>
@@ -39,7 +41,11 @@ export function Signup(){
                   </C.ButtonWrap>
                   <C.Text>
                     Already have an account? 
-                    <Link to='/signin' className="signin-link">Sign in</Link>
+                    <Link 
+                      to='/signin' 
+                      className="signin-link"
+                      onClick={startSignupAnimationOnClick}
+                    >Sign in</Link>
                   </C.Text>
                 </C.Form>
               </C.FormWrap>
